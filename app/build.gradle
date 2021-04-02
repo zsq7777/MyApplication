@@ -13,17 +13,66 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
+    //签名信息配置
+    signingConfigs {
+        debug {
+            storeFile file('../mykey.jks')
+            keyAlias 'key'
+            storePassword 'android'
+            keyPassword 'android'
+        }
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            storeFile file('../mykey.jks')
+            keyAlias 'key'
+            storePassword 'android'
+            keyPassword 'android'
         }
     }
-    compileOptions {
+
+    //配置build类型
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
+            //生成release 版本时使用的签名文件
+            signingConfig signingConfigs.release
+        }
+        debug {
+            initWith release
+            applicationIdSuffix ".debug"
+            versionNameSuffix ".debug"
+        }
+        other {
+            initWith release
+            applicationIdSuffix ".other"
+            versionNameSuffix ".other"
+        }
+    }
+    //指定风味尺寸
+    flavorDimensions "default"
+//    ,"other"
+
+    //指定产品
+    productFlavors {
+        productA{
+            dimension "default"
+            //可指定包名、配置等
+        }
+        productB{
+            dimension "default"
+        }
+//        productC{
+//            dimension "other"
+//        }
+    }
+
+        compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
