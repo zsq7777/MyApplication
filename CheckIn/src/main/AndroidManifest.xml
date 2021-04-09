@@ -2,11 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.able.checkin">
-
-
-    <!--  唤醒锁定  -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
+    <!-- 唤醒锁定 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- 系统启动广播 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -15,13 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+        <activity android:name=".MainActivity2"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!--    广播接收器    -->
+        </activity> <!-- 广播接收器 -->
         <receiver
             android:name=".broadacstreceiver.MyBroadcastReceiver"
             android:exported="true">
@@ -30,8 +29,6 @@
                 <action android:name="android.intent.action.INPUT_METHOD_CHANGED" />
             </intent-filter>
         </receiver>
-
-
     </application>
 
 </manifest>
