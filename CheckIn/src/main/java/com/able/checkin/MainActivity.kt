@@ -1,13 +1,13 @@
 package com.able.checkin
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import java.util.*
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.OneTimeWorkRequest
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
+import com.able.checkin.workmanager.CheckInWorkManager
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,22 +15,23 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //使用构建器
+//        val checkInWorkRequest = PeriodicWorkRequestBuilder<CheckInWorkManager>(2, TimeUnit.MINUTES)
+//            .build()
 
-        val calendar = Calendar.getInstance()
-        calendar[Calendar.HOUR_OF_DAY] = 14
-        calendar[Calendar.MINUTE] = 40
-        calendar[Calendar.SECOND] = 0
-        Log.i("值","${calendar.timeInMillis}")
-        val pendingIntent:PendingIntent = PendingIntent.getActivity(
-            this,
-            0,
-            Intent().setClass(this, MainActivity2::class.java),
-            0
-        )
-        val alarmManager =
-            getSystemService(Context.ALARM_SERVICE) as? AlarmManager
-        alarmManager?.setInexactRepeating(AlarmManager.RTC_WAKEUP,calendar.timeInMillis,AlarmManager.INTERVAL_DAY,pendingIntent)
+        // Additional configuration
 
+        val checkInWorkRequest =
+            PeriodicWorkRequestBuilder<CheckInWorkManager>(15, TimeUnit.MINUTES)
+                .build()
+
+        //一次性任务
+//        val checkInWorkRequest = OneTimeWorkRequest.from(CheckInWorkManager::class.java)
+
+//        WorkManager.getInstance(this).enqueue(checkInWorkRequest)
+        //唯一工作
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork("checkIn",
+            ExistingPeriodicWorkPolicy.REPLACE,checkInWorkRequest)
 
     }
 
