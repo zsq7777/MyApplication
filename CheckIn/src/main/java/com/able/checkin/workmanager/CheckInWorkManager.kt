@@ -21,7 +21,8 @@ class CheckInWorkManager(context: Context, workerParams: WorkerParameters) :
     override fun doWork(): Result {
         //亮屏 解锁 打卡
         //亮屏
-//        WakeLockUtil.acquireWakeLock(mContext)
+
+        WakeLockUtil.acquireWakeLock(mContext)
         Log.i("worker日志","开启亮屏")
         //打开钉钉
         openDingDing()
@@ -50,5 +51,6 @@ class CheckInWorkManager(context: Context, workerParams: WorkerParameters) :
             mContext.startActivity(intent)
         }
     }
+
 
 }
