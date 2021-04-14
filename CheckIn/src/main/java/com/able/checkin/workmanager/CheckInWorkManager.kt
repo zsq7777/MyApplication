@@ -11,6 +11,7 @@ import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat.startActivity
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import com.able.checkin.App
 import com.able.checkin.util.WakeLockUtil
 
 class CheckInWorkManager(context: Context, workerParams: WorkerParameters) :
@@ -26,6 +27,7 @@ class CheckInWorkManager(context: Context, workerParams: WorkerParameters) :
         Log.i("worker日志","开启亮屏")
         //打开钉钉
         openDingDing()
+
         //工作成功
         return Result.success()
     }

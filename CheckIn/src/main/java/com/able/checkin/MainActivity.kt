@@ -7,33 +7,56 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.able.checkin.db.AppDatabase
+import com.able.checkin.db.entity.CheckInTimeRuleEntity
 import com.able.checkin.workmanager.CheckInWorkManager
 import com.google.android.material.switchmaterial.SwitchMaterial
-import java.util.*
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
-class MainActivity : AppCompatActivity() {
+class MainActivity() : AppCompatActivity() {
+    private val mCompositeDisposable= CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initData()
         initView()
         //使用构建器
 //        val checkInWorkRequest = PeriodicWorkRequestBuilder<CheckInWorkManager>(2, TimeUnit.MINUTES)
 //            .build()
+        //一次性任务
+//        val checkInWorkRequest = OneTimeWorkRequest.from(CheckInWorkManager::class.java)
+//        WorkManager.getInstance(this).enqueue(checkInWorkRequest)
 
         // Additional configuration
         val checkInWorkRequest =
             PeriodicWorkRequestBuilder<CheckInWorkManager>(15, TimeUnit.MINUTES)
                 .build()
 
-        //一次性任务
-//        val checkInWorkRequest = OneTimeWorkRequest.from(CheckInWorkManager::class.java)
-
-//        WorkManager.getInstance(this).enqueue(checkInWorkRequest)
         //唯一工作
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork("checkIn",
-            ExistingPeriodicWorkPolicy.REPLACE,checkInWorkRequest)
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+            "checkIn",
+            ExistingPeriodicWorkPolicy.REPLACE, checkInWorkRequest
+        )
+
+
+    }
+
+    private fun initData() {
+        val checkInTimeRuleDao = AppDatabase.getInstance(applicationContext).checkInTimeRuleDao()
+        val loadCheckInTimeRule: Flowable<Array<CheckInTimeRuleEntity>> = checkInTimeRuleDao.loadCheckInTimeRule()
+        //查询所有规则
+        mCompositeDisposable.add(loadCheckInTimeRule.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+
+            })
+
+
 
     }
 
@@ -50,6 +73,11 @@ class MainActivity : AppCompatActivity() {
         findViewById<SwitchMaterial>(R.id.btn3).setOnClickListener {
 
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+
     }
 
 }
