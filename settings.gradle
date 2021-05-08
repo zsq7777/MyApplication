@@ -1,3 +1,4 @@
+include ':javaapp'
 include ':mylibrary'
 include ':CheckIn'
 include ':app'

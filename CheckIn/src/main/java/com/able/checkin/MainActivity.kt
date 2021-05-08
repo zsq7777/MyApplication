@@ -25,23 +25,17 @@ class MainActivity() : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         initData()
         initView()
-        //使用构建器
-//        val checkInWorkRequest = PeriodicWorkRequestBuilder<CheckInWorkManager>(2, TimeUnit.MINUTES)
-//            .build()
-        //一次性任务
-//        val checkInWorkRequest = OneTimeWorkRequest.from(CheckInWorkManager::class.java)
-//        WorkManager.getInstance(this).enqueue(checkInWorkRequest)
 
-        // Additional configuration
         val checkInWorkRequest =
             PeriodicWorkRequestBuilder<CheckInWorkManager>(15, TimeUnit.MINUTES)
                 .build()
-
-        //唯一工作
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
-            "checkIn",
-            ExistingPeriodicWorkPolicy.REPLACE, checkInWorkRequest
-        )
+//        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+//            "checkIn",
+//            ExistingPeriodicWorkPolicy.REPLACE, checkInWorkRequest
+//        )
+        WorkManager
+            .getInstance(this)
+            .enqueue(checkInWorkRequest)
 
 
     }

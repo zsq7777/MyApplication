@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <EditText
+        android:id="@+id/tv_title"
+        android:layout_marginTop="15dp"
+        android:padding="15dp"
+        android:hint="标题"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        android:id="@+id/tv_start_time"
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:text="请选择起始时间"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/tv_start_time"
+        android:id="@+id/tv_end_time"
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:text="请选择结束时间"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn"
+        android:text=""
+        app:layout_constraintTop_toBottomOf="@id/tv_end_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
