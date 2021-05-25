@@ -29,13 +29,13 @@ class MainActivity() : AppCompatActivity() {
         val checkInWorkRequest =
             PeriodicWorkRequestBuilder<CheckInWorkManager>(15, TimeUnit.MINUTES)
                 .build()
-//        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
-//            "checkIn",
-//            ExistingPeriodicWorkPolicy.REPLACE, checkInWorkRequest
-//        )
-        WorkManager
-            .getInstance(this)
-            .enqueue(checkInWorkRequest)
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+            "checkIn",
+            ExistingPeriodicWorkPolicy.REPLACE, checkInWorkRequest
+        )
+//        WorkManager
+//            .getInstance(this)
+//            .enqueue(checkInWorkRequest)
 
 
     }

@@ -1,19 +1,15 @@
 package com.able.checkin.workmanager
 
-import android.app.AlertDialog
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
 import android.util.Log
-import androidx.annotation.NonNull
-import androidx.core.content.ContextCompat.startActivity
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.able.checkin.App
 import com.able.checkin.util.TimeUtils
 import com.able.checkin.util.WakeLockUtil
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -25,9 +21,13 @@ class CheckInWorkManager(context: Context, workerParams: WorkerParameters) :
 
     override fun doWork(): Result {
 
+        val cal = Calendar.getInstance()
+         if (cal[Calendar.DAY_OF_WEEK] === Calendar.SATURDAY || cal[Calendar.DAY_OF_WEEK] === Calendar.SUNDAY) {
+             return Result.success()
+         }
 
-        //判断时间是否在范围内
-        if(TimeUtils.isRunTime("2021-05-08 8:25:00","2021-05-08 8:50:59")||TimeUtils.isRunTime("2021-05-08 18:15:00","2021-05-08 18:35:59")){
+        if(TimeUtils.isRunTime("2021-05-08 8:25:00","2021-05-08 8:50:59")||TimeUtils.isRunTime("2021-05-08 18:40:00","2021-05-08 18:59:59")){
+
 //        if (TimeUtils.isRunTime(
 //                "2021-05-08 13:39:00",
 //                "2021-05-08 13:59:59"
