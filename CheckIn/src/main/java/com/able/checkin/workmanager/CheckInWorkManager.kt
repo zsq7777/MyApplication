@@ -26,7 +26,8 @@ class CheckInWorkManager(context: Context, workerParams: WorkerParameters) :
              return Result.success()
          }
 
-        if(TimeUtils.isRunTime("2021-05-08 8:25:00","2021-05-08 8:50:59")||TimeUtils.isRunTime("2021-05-08 18:40:00","2021-05-08 18:59:59")){
+        if(TimeUtils.isRunTime("2021-05-08 8:25:00","2021-05-08 8:50:59")||TimeUtils.isRunTime("2021-05-08 18:40:00","2021-05-08 18:59:59")
+            ||TimeUtils.isRunTime("2021-05-08 12:50","2021-05-08 13:14:59")){
 
 //        if (TimeUtils.isRunTime(
 //                "2021-05-08 13:39:00",
