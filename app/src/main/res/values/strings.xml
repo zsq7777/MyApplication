@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="title_content">交易模型是铁律,不可违背,只可在交易结束后优化</string>
 </resources>
