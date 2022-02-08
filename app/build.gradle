@@ -10,6 +10,8 @@ android {
     defaultConfig {
         applicationId "com.able"
         minSdkVersion 16
+
+
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -25,6 +27,7 @@ android {
             storePassword 'android'
             keyPassword 'android'
         }
+
         release {
             storeFile file('../mykey.jks')
             keyAlias 'key'

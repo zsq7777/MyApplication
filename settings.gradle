@@ -3,3 +3,4 @@ include ':mylibrary'
 include ':CheckIn'
 include ':app'
 rootProject.name = "My Application"
+include ':phonemanage'

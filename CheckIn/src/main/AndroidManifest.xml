@@ -20,7 +20,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- 广播接收器 -->
+        </activity>
+        <!-- 广播接收器 -->
         <receiver
             android:name=".broadacstreceiver.MyBroadcastReceiver"
             android:exported="true">
