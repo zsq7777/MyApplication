@@ -21,13 +21,13 @@ class CheckInWorkManager(context: Context, workerParams: WorkerParameters) :
 
     override fun doWork(): Result {
 
-        val cal = Calendar.getInstance()
-         if (cal[Calendar.DAY_OF_WEEK] === Calendar.SATURDAY || cal[Calendar.DAY_OF_WEEK] === Calendar.SUNDAY) {
-             return Result.success()
-         }
+//        val cal = Calendar.getInstance()
+//         if (cal[Calendar.DAY_OF_WEEK] == Calendar.SATURDAY || cal[Calendar.DAY_OF_WEEK] == Calendar.SUNDAY) {
+//             return Result.success()
+//         }
 
-        if(TimeUtils.isRunTime("2021-05-08 8:25:00","2021-05-08 8:50:59")||TimeUtils.isRunTime("2021-05-08 18:40:00","2021-05-08 18:59:59")
-            ||TimeUtils.isRunTime("2021-05-08 12:50","2021-05-08 13:14:59")){
+//        if(TimeUtils.isRunTime("2021-05-08 8:25:00","2021-05-08 8:50:59")||TimeUtils.isRunTime("2021-05-08 18:40:00","2021-05-08 18:59:59")
+//            ||TimeUtils.isRunTime("2021-05-08 12:50","2021-05-08 13:14:59")){
 
 //        if (TimeUtils.isRunTime(
 //                "2021-05-08 13:39:00",
@@ -39,10 +39,10 @@ class CheckInWorkManager(context: Context, workerParams: WorkerParameters) :
             Log.i("worker日志", "开启亮屏")
             //打开应用
             openDingDing()
-            Log.i("时间log", "在时间范围内--当前时间：${dateFormat.format(Date())}")
-        } else {
-            Log.i("时间log", "不在时间范围内--当前时间：${dateFormat.format(Date())}")
-        }
+//            Log.i("时间log", "在时间范围内--当前时间：${dateFormat.format(Date())}")
+//        } else {
+//            Log.i("时间log", "不在时间范围内--当前时间：${dateFormat.format(Date())}")
+//        }
 
 
         //工作成功

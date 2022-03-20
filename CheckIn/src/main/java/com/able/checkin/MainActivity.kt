@@ -1,6 +1,7 @@
 package com.able.checkin
 
 import android.app.Activity
+import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -29,20 +30,37 @@ class MainActivity() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initView();
         initData()
-        initView()
 
-        val checkInWorkRequest =
-            PeriodicWorkRequestBuilder<CheckInWorkManager>(15, TimeUnit.MINUTES)
-                .build()
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
-            "checkIn",
-            ExistingPeriodicWorkPolicy.REPLACE, checkInWorkRequest
-        )
-//        WorkManager
-//            .getInstance(this)
-//            .enqueue(checkInWorkRequest)
 
+
+
+
+
+//        val checkInWorkRequest =
+//            PeriodicWorkRequestBuilder<CheckInWorkManager>(15, TimeUnit.MINUTES)
+//                .build()
+//        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+//            "checkIn",
+//            ExistingPeriodicWorkPolicy.REPLACE, checkInWorkRequest
+//        )
+
+
+    }
+
+    private fun initView() {
+        findViewById<Button>(R.id.BtnDingDing).setOnClickListener {
+            val intent = Intent()
+            val cn = ComponentName(
+                "com.alibaba.android.rimet",
+                "com.alibaba.android.rimet.biz.LaunchHomeActivity"
+            )
+            intent.component = cn
+            startActivity(intent)
+        }
+
+//        home_app_item-菜单
     }
 
     private fun initData() {
@@ -56,26 +74,6 @@ class MainActivity() : AppCompatActivity() {
             })
 
 
-
-    }
-
-    private fun initView() {
-        //增加打卡时间规则
-        findViewById<Button>(R.id.btn1).setOnClickListener {
-
-        }
-        //是否开启大小周  , 本周是大周还是小周。
-        findViewById<SwitchMaterial>(R.id.btn2).setOnClickListener {
-
-        }
-        //是否开启自动打卡
-        findViewById<SwitchMaterial>(R.id.btn3).setOnClickListener {
-
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
 
     }
 
