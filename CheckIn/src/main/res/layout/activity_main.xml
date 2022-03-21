@@ -67,7 +67,7 @@
         app:layout_constraintBottom_toTopOf="@id/BtnDingDing"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvRange" />
+        app:layout_constraintTop_toBottomOf="@id/swIsDDJS" />
     <!--  可扩展，当前位置，当前wifi,当前网络状态  -->
     <Button
         android:id="@+id/BtnDingDing"
