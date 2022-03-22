@@ -6,24 +6,11 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.os.PowerManager
 import android.provider.Settings
-import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
-import com.able.checkin.db.AppDatabase
-import com.able.checkin.db.entity.CheckInTimeRuleEntity
-import com.able.checkin.workmanager.CheckInWorkManager
-import com.google.android.material.switchmaterial.SwitchMaterial
-import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
 
 class MainActivity() : AppCompatActivity() {
     private val mCompositeDisposable= CompositeDisposable()
@@ -31,8 +18,8 @@ class MainActivity() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initView();
-        initData()
+        initView()
+//        initData()
 
 
 
@@ -64,19 +51,19 @@ class MainActivity() : AppCompatActivity() {
 //        home_app_item-菜单
     }
 
-    private fun initData() {
-        val checkInTimeRuleDao = AppDatabase.getInstance(applicationContext).checkInTimeRuleDao()
-        val loadCheckInTimeRule: Flowable<Array<CheckInTimeRuleEntity>> = checkInTimeRuleDao.loadCheckInTimeRule()
-        //查询所有规则
-        mCompositeDisposable.add(loadCheckInTimeRule.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-
-            })
-
-
-
-    }
+//    private fun initData() {
+//        val checkInTimeRuleDao = AppDatabase.getInstance(applicationContext).checkInTimeRuleDao()
+//        val loadCheckInTimeRule: Flowable<Array<CheckInTimeRuleEntity>> = checkInTimeRuleDao.loadCheckInTimeRule()
+//        //查询所有规则
+//        mCompositeDisposable.add(loadCheckInTimeRule.subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe {
+//
+//            })
+//
+//
+//
+//    }
 
     /**
      * 开启电量优化

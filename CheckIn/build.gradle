@@ -2,16 +2,16 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion 31
 
     defaultConfig {
         applicationId "com.able.checkin"
-        minSdkVersion 16
-        targetSdkVersion 30
+        minSdkVersion 26
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -38,6 +38,9 @@ dependencies {
     def work_version="2.5.0"
     def room_version = "2.3.0"
 
+    kapt "com.google.dagger:hilt-android-compiler:2.38.1"
+    implementation "com.google.dagger:hilt-android:2.38.1"
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.21"
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
@@ -58,9 +61,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:2.2.9"
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
 
-
-
-
 //    implementation "androidx.work:work-runtime:$work_version"
     // Kotlin + coroutines
     implementation "androidx.work:work-runtime-ktx:$work_version"
@@ -68,4 +68,64 @@ dependencies {
     androidTestImplementation "androidx.work:work-testing:$work_version"
     // 多进程支持
     implementation "androidx.work:work-multiprocess:$work_version"
+
+
+    /**
+     * datastore
+     */
+    api "androidx.datastore:datastore-preferences:1.0.0"
+    /**
+     * 网络请求
+     */
+    //http
+    api 'com.squareup.okhttp3:okhttp:4.9.3'
+    api 'com.squareup.okhttp3:logging-interceptor:4.9.3'
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
+    api 'com.squareup.retrofit2:converter-gson:2.9.0'
+    api 'com.squareup.retrofit2:converter-scalars:2.3.0'
+    //Gson: com.squareup.retrofit2:converter-gson
+    //Scalars (primitives, boxed, and String): com.squareup.retrofit2:converter-scalars
+//    api 'com.squareup.retrofit2:converter-scalars:2.8.1'
+
+    //mqttv5
+    api 'org.eclipse.paho:org.eclipse.paho.mqttv5.client:1.2.5'
+    //rabbitmq
+    api 'com.rabbitmq:amqp-client:4.12.0'
+    //工具类
+    api 'com.blankj:utilcodex:1.31.0'
+    /**
+     * 协程
+     */
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
+
+    /**
+     * jetpack
+     */
+    api "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+    api "androidx.fragment:fragment-ktx:1.4.1"
+
+    /**
+     * room数据库
+     */
+    api 'androidx.room:room-runtime:2.4.2'
+    api "androidx.room:room-ktx:2.4.2"
+
+    /**
+     * androidx.compose组件
+     */
+    //动画
+    api 'androidx.compose.animation:animation:1.1.1'
+    //组合函数
+    api 'androidx.compose.compiler:compiler:1.1.1'
+    //扩展Foundation
+    api 'androidx.compose.foundation:foundation:1.1.1'
+    //MD组件
+    api 'androidx.compose.material:material:1.1.1'
+    //MD新风格组件 无稳定版
+//    api 'androidx.compose.material3:material3:1.0.0'
+    //核心运行时
+    api 'androidx.compose.runtime:runtime:1.1.1'
+    //基本组件：布局、绘图、输入
+    api 'androidx.compose.ui:ui:1.1.1'
 }
